@@ -233,7 +233,7 @@ class lib_hint_message {
 
         var title = '';
         var headerColor = '#4A76A8';
-        var headerTextColor = '#FFFFFF';
+        var headerTextColor = '#FFFFFF";
         var type = '<div class="far fa-dot-circle"></div>';
         var text = '';
 
@@ -249,7 +249,7 @@ class lib_hint_message {
                             type = '<div class="fas fa-question-circle"></div>';
                             break;
                         }
-                        case 'warning': {
+                        case 'error': {
                             type = '<div class="fas fa-exclamation-circle"></div>';
                             break;
                         }
