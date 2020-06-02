@@ -56,7 +56,7 @@ class lib_hint {
                     }
                     break;
                 }
-                case 'text' : {
+                case 'text': {
                     element.innerHTML = component[prop];
                     break;
                 }
