@@ -233,7 +233,7 @@ class lib_hint_message {
 
         var title = '';
         var headerColor = '#4A76A8';
-        var headerTextColor = '#FFFFFF";
+        var headerTextColor = '#FFFFFF';
         var type = '<div class="far fa-dot-circle"></div>';
         var text = '';
 
