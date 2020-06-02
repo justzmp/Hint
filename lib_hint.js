@@ -10,16 +10,22 @@ class lib_hint {
         icons.href = 'https://use.fontawesome.com/releases/v5.6.1/css/all.css';
         icons.integrity = 'sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP';
         icons.crossOrigin = 'anonymous';
-        document.getElementsByTagName('head')[0].appendChild(icons);
+        document.head.appendChild(icons);
 
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = 'https://fonts.googleapis.com/css2?family=Ubuntu&display=swap';
-        document.getElementsByTagName('head')[0].appendChild(link);
+        document.head.appendChild(link);
 
         var style = document.createElement('style');
         style.innerHTML = 'html, body, #root { height: 100%; width: 100%; overflow: hidden; margin: 0; padding: 0; position: absolute; display: flex; align-items: center; justify-content: center; }';
-        document.getElementsByTagName('head')[0].appendChild(style);
+        document.head.appendChild(style);
+
+        var jQuery = document.createElement('script');
+        jQuery.src = 'https://code.jquery.com/jquery-3.5.1.js';
+        jQuery.integrity = 'sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=';
+        jQuery.crossOrigin = 'anonymous';
+        document.head.appendChild(jQuery);
 
         this.renderCmp({
             type: 'div',
