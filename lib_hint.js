@@ -291,8 +291,7 @@ class lib_hint_message {
                         height: '100%',
                         width: '100%',
                         display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
+                        overflow: 'auto'
                     }
                 }
             ]
