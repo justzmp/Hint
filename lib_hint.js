@@ -12,10 +12,10 @@ class lib_hint {
         icons.crossOrigin = 'anonymous';
         document.head.appendChild(icons);
 
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://fonts.googleapis.com/css2?family=Ubuntu&display=swap';
-        document.head.appendChild(link);
+        var font = document.createElement('link');
+        font.rel = 'stylesheet';
+        font.href = 'https://fonts.googleapis.com/css2?family=Ubuntu&display=swap';
+        document.head.appendChild(font);
 
         var style = document.createElement('style');
         style.innerHTML = 'html, body, #root { height: 100%; width: 100%; overflow: hidden; margin: 0; padding: 0; position: absolute; display: flex; align-items: center; justify-content: center; }';
