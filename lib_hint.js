@@ -1,7 +1,9 @@
 class lib_hint {
     constructor() {
+
         this.Form = new lib_hint_form();
         this.Message = new lib_hint_message();
+        this.Components = new lib_hint_component();
     }
 
     start() {
@@ -21,20 +23,34 @@ class lib_hint {
         style.innerHTML = 'html, body, #root { height: 100%; width: 100%; overflow: hidden; margin: 0; padding: 0; position: absolute; display: flex; align-items: center; justify-content: center; }';
         document.head.appendChild(style);
 
-        var jQuery = document.createElement('script');
-        jQuery.src = 'https://code.jquery.com/jquery-3.5.1.js';
-        jQuery.integrity = 'sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=';
-        jQuery.crossOrigin = 'anonymous';
-        document.head.appendChild(jQuery);
-
         this.renderCmp({
             type: 'div',
-            id: 'root'
+            id: 'root',
+            htype: 'root'
         }, document.body);
     }
 
-    getCmp(id) {
-        return document.getElementById(id);
+    defineCmp(component) {
+        var ok = false;
+        for (var prop in component) {
+            if (prop == 'htype')
+                ok = true;
+        }
+        if (ok) {
+            this.Components.saveToList(component);
+        }
+    }
+
+    getDefined(htype) {
+        var el = this.Components.getHType(htype);
+        if (el) {
+            return el;
+        }
+        else return null;
+    }
+
+    getCmp(htype) {
+        return document.body.querySelector('[htype = "' + htype + '"]');
     }
 
     renderCmp(component, parent) {
@@ -98,6 +114,19 @@ class lib_hint {
             return name + '(' + props.toString() + ')';
         } else return name + '()';
     }
+
+    request(type, url, headers, body, handler) {
+        $.ajax({
+            type: type,
+            async: true,
+            url: url,
+            headers: headers,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(body),
+            success: handler(response)
+        })
+    }
 }
 
 class lib_hint_form {
@@ -139,6 +168,7 @@ class lib_hint_form {
         }
 
         var id = 'form' + this.amount;
+        var idForm = 'idForm' + this.amount;
         this.amount++;
 
         Hint.renderCmp({
@@ -156,6 +186,7 @@ class lib_hint_form {
             items: [
                 {
                     type: 'div',
+                    id: idForm,
                     style: {
                         height: height + 'px',
                         width: width + 'px',
@@ -176,6 +207,7 @@ class lib_hint_form {
                                 width: 'calc(100% - 10px)',
                                 padding: '0 0 0 10px',
                                 background: headerColor,
+                                cursor: 'pointer',
                                 color: headerTextColor,
                                 fontSize: '14px',
                                 margin: 0,
@@ -220,6 +252,7 @@ class lib_hint_form {
                 }
             ]
         }, Hint.getCmp('root'));
+        $('#' + idForm).draggable();
     }
 }
 
@@ -303,6 +336,30 @@ class lib_hint_message {
             ]
         })
     }
+}
+
+class lib_hint_component {
+
+    constructor() {
+        this.list = [{
+            type: 'div',
+            id: 'root',
+            htype: 'root'
+        }];
+    }
+
+    saveToList(component) {
+        this.list.push(component);
+    }
+
+    getHType(htype) {
+        for (var i = 0; i < this.list.length; i++) {
+            if (this.list[i].htype == htype)
+                return this.list[i];
+        }
+        return null;
+    }
+
 }
 
 const Hint = new lib_hint();
